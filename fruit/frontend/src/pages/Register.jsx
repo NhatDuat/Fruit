@@ -1,19 +1,21 @@
-import React, { useState, useContext } from 'react';
-import { Container, Row, Col, Form, FormGroup, Button } from 'reactstrap';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Button, Col, Container, Form, FormGroup, Row } from 'reactstrap';
 import '../styles/login.css';
-
+import axiosClient from '../api/axiosClient.js';
 import registerImg from '../assets/images/register.png';
 import userIcon from '../assets/images/user.png';
 
 import { AuthContext } from './../context/AuthContext';
 import { BASE_URL } from './../untils/config';
+import { toastMessage } from '../compontents/Toastify';
+import axios from 'axios';
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
-    userName: undefined,
-    email: undefined,
-    password: undefined,
+    username: '',
+    email: '',
+    password: '',
   });
 
   const { dispatch } = useContext(AuthContext);
@@ -23,26 +25,18 @@ const Register = () => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  const handleClick = async e => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch(`${BASE_URL}/auth/register`, {
-        method: 'post',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(credentials),
+    axios
+      .post('http://localhost:4000/api/v1/auth/register', credentials)
+      .then((res) => {
+        dispatch({ type: 'REGISTER_SUCCESS' });
+        navigate(`/login`);
+        toastMessage('success', res.data.message || 'Dang nhap thasnh cong');
+      })
+      .catch((err) => {
+        toastMessage('error', err.response.data.message || 'Loi he thong');
       });
-      const result = await res.json();
-
-      if (!res.ok) alert(result.message);
-      console.log(result.data);
- 
-      dispatch({ type: 'REGISTER_SUCCESS' });
-      navigate('/');
-    } catch (error) {
-      alert(error.message);
-    }
   };
 
   return (

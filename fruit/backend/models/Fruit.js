@@ -20,7 +20,7 @@ const fruitSchema = new mongoose.Schema(
       required: true,
     },
     photo: {
-      type: Object,
+      type: String,
       required: true,
     },
     

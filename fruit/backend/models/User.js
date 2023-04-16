@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema(
   {
@@ -19,14 +19,18 @@ const userSchema = new mongoose.Schema(
 
     photo: {
       type: String,
+      default:
+        'https://antimatter.vn/wp-content/uploads/2022/11/anh-avatar-trang-fb-mac-dinh.jpg',
     },
 
     role: {
       type: String,
-      default: "user",
+      default: 'user',
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("User", userSchema);
+const Users = mongoose.model('User', userSchema);
+
+export default Users;

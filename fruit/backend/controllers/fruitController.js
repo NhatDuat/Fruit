@@ -111,17 +111,14 @@ export const getFruitBySearch = async (req, res) => {
   const { title } = req.query;
 
   try {
-    const filter = {
-      $and: [
-        {
+    const filter = title
+      ? {
           title: {
             $regex: title,
-            $options: '$i',
+            $options: 'i',
           },
-        },
-      
-      ],
-    };
+        }
+      : {};
 
     const result = await Fruit.find(filter).populate('reviews');
 

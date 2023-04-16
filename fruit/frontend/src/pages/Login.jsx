@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Container, Row, Col, Form, FormGroup, Button } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.css';
@@ -8,6 +8,8 @@ import userIcon from '../assets/images/user.png';
 
 import { AuthContext } from './../context/AuthContext';
 import { BASE_URL } from './../untils/config';
+import axios from 'axios';
+import { toastMessage } from '../compontents/Toastify';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -25,27 +27,42 @@ const Login = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     dispatch({ type: 'LOGIN_START' });
-    try {
-      const res = await fetch(`${BASE_URL}/auth/login`, {
-        method: 'post',
-        headers: {
-          'content-type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify(credentials),
+    axios
+      .post('http://localhost:4000/api/v1/auth/login', credentials)
+      .then((res) => {
+        navigate(`/`);
+        toastMessage('success', res.data.message || 'Dang nhap thasnh cong');
+        dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.data });
+      })
+      .catch((err) => {
+        toastMessage('error', err.response.data.message || 'Loi he thong');
+        dispatch({ type: 'LOGIN_FAILURE', payload: err.response.data.message });
       });
+    // try {
+    //   const res = await fetch(`${BASE_URL}/auth/login`, {
+    //     method: 'post',
+    //     headers: {
+    //       'content-type': 'application/json',
+    //     },
+    //     credentials: 'include',
+    //     body: JSON.stringify(credentials),
+    //   });
 
-      const result = await res.json();
-      if (!res.ok) alert(result.message);
+    //   const result = await res.json();
+    //   if (!res.ok) alert(result.message);
 
-      console.log(result.data);
+    //   console.log(result.data);
 
-      dispatch({ type: 'LOGIN_SUCCESS', payload: result.data });
-      navigate('/login');
-    } catch (error) {
-      dispatch({ type: 'LOGIN_FAILURE', payload: error.message });
-    }
+    //   dispatch({ type: 'LOGIN_SUCCESS', payload: result.data });
+    //   navigate('/login');
+    // } catch (error) {
+    //   dispatch({ type: 'LOGIN_FAILURE', payload: error.message });
+    // }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <section>

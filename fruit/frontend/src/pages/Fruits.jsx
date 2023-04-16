@@ -40,6 +40,54 @@ const Fruits = () => {
           </Row>
         </Container>
       </section>
+      <section className="sec">
+      <Container>
+          <Row>
+          <div className="phan2">
+          <div className="hinhanh">
+            <div className="img3Anh">
+              <img src="https://png.pngtree.com/png-vector/20210913/ourlarge/pngtree-fruit-platter-fresh-and-fresh-nutritious-and-healthy-png-image_3922446.jpg" alt="" width="100%" />
+            </div>
+            <div className="thongtin">
+              <h2>Trái cây</h2>
+              <p>
+                Rất nhiều loại trái cây khác nhau 
+                 <br />
+                kết lại sẽ tạo nên một sản phẩm ngon,bổ ,khỏe
+              </p>
+            </div>
+          </div>
+          <div className="hinhanh">
+            <div className="img3Anh">
+              <img src="https://nguyenlieuphachemientay.com/wp-content/uploads/2020/09/Diem-danh-15-loai-do-uong-hot-nhat-nam-co-vy.jpg" alt="" width="100%" />
+            </div>
+            <div className="thongtin">
+              <h2>Thức uống</h2>
+              <p>
+                Nguyên liệu trái cây làm nên các loại nước ép trái cây khác nhau
+                <br />
+                kết lại sẽ tạo nên một sản phẩm ngon,bổ ,rẻ
+              </p>
+            </div>
+          </div>
+          <div className="hinhanh">
+            <div className="img3Anh">
+              <img src="https://hoaquafuji.com/storage/app/media/tintuc/cropped-images/pexels-photo-247685-0-0-0-0-1544521580.png" alt="" width="100%" />
+            </div>
+            <div className="thongtin">
+              <h2>Chất lượng</h2>
+              <p>
+                Rất nhiều loại trái cây khác nhau 
+                 <br />
+                kết lại sẽ tạo nên một sản phẩm ngon,bổ ,khỏe
+              </p>
+            </div>
+          </div>
+        </div>
+          </Row>
+        </Container>
+    
+     </section>
       <section className="pt-0">
         <Container>
           {loading && <h4 className="text-center pt-5">Loading...</h4>}
@@ -69,6 +117,7 @@ const Fruits = () => {
           )}
         </Container>
       </section>
+     
       <Newsletter />
     </>
   );

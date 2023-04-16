@@ -12,6 +12,7 @@ import FeaturedFruitList from '../compontents/Featured.fruits/FeaturedFruitList'
 import MasonryImagesGallery from '../compontents/Image-gallery/MasonryImagesGallery';
 import Testimonials from '../compontents/Testimonial/Testimonials';
 import Newsletter from '../shared/Newsletter';
+import { toastMessage } from '../compontents/Toastify';
 const Home = () => {
   return (
     <>
@@ -55,7 +56,7 @@ const Home = () => {
           </Row>
         </Container>
       </section>
-      
+
       {/*=================Phần tham quan trái cây===========*/}
       <section>
         <Container>
@@ -138,9 +139,7 @@ const Home = () => {
           <Row>
             <Col lg="12">
               <Subtitle subtitle={'Phần 4'} />
-              <h2 className="testimonial__title">
-              Trái cây Đặc Sản
-              </h2>
+              <h2 className="testimonial__title">Trái cây Đặc Sản</h2>
             </Col>
             <Col lg="12">
               <Testimonials />
@@ -148,11 +147,10 @@ const Home = () => {
           </Row>
         </Container>
       </section>
-      
 
       {/*=================testimonital section end===========*/}
 
-      <Newsletter/>
+      <Newsletter />
     </>
   );
 };
